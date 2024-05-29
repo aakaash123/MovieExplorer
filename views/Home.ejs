@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    .search-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to right, #141e30, #243b55);
+      background-size: cover;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .title {
+      font-size: 4rem;
+      color: #ffffff;
+      margin-bottom: 30px;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .search-input, .dropdown, .year-input, .language-input, .region-input {
+      margin: 10px 0;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 25px;
+      width: 220px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s;
+    }
+
+    .search-input:focus, .dropdown:focus, .year-input:focus, .language-input:focus, .region-input:focus {
+      background: rgba(255, 255, 255, 0.3);
+      outline: none;
+    }
+
+    .search-button {
+      padding: 15px 30px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 25px;
+      background: #ffffff;
+      color: #141e30;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-button:hover {
+      background: #f06;
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    .search-button:active {
+      transform: scale(0.95);
+    }
+
+    @media (min-width: 600px) {
+      .search-box {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 40px;
+      }
+
+      .search-input, .dropdown, .year-input, .language-input, .region-input {
+        width: 180px;
+      }
+
+      .search-button {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="search-container">
+    <h1 class="title">Movie Explorer</h1>
+    <form class="search-box" action="/getMovies" method="GET">
+      <input
+        type="text"
+        name="query"
+        placeholder="Search..."
+        value="<%= query %>"
+        class="search-input"
+      />
+      <select name="genre" class="dropdown">
+        <option value="" <%= genre === '' ? 'selected' : '' %>>Select Genre</option>
+        <option value="action" <%= genre === 'action' ? 'selected' : '' %>>Action</option>
+        <option value="adventure" <%= genre === 'adventure' ? 'selected' : '' %>>Adventure</option>
+        <option value="comedy" <%= genre === 'comedy' ? 'selected' : '' %>>Comedy</option>
+        <option value="drama" <%= genre === 'drama' ? 'selected' : '' %>>Drama</option>
+        <option value="fantasy" <%= genre === 'fantasy' ? 'selected' : '' %>>Fantasy</option>
+        <option value="horror" <%= genre === 'horror' ? 'selected' : '' %>>Horror</option>
+        <option value="romance" <%= genre === 'romance' ? 'selected' : '' %>>Romance</option>
+        <option value="science fiction" <%= genre === 'science fiction' ? 'selected' : '' %>>Science Fiction</option>
+        <option value="thriller" <%= genre === 'thriller' ? 'selected' : '' %>>Thriller</option>
+        <option value="animation" <%= genre === 'animation' ? 'selected' : '' %>>Animation</option>
+      </select>
+      <input
+        type="number"
+        name="year"
+        placeholder="Year"
+        value="<%= year %>"
+        class="year-input"
+      />
+      <select name="includeAdult" class="dropdown">
+        <option value="" <%= includeAdult === '' ? 'selected' : '' %>>Include Adult</option>
+        <option value="yes" <%= includeAdult === 'yes' ? 'selected' : '' %>>Yes</option>
+        <option value="no" <%= includeAdult === 'no' ? 'selected' : '' %>>No</option>
+      </select>
+      <input
+        type="text"
+        name="language"
+        placeholder="Language"
+        value="<%= language %>"
+        class="language-input"
+      />
+      <input
+        type="text"
+        name="region"
+        placeholder="Region"
+        value="<%= region %>"
+        class="region-input"
+      />
+      <button type="submit" class="search-button">Search</button>
+    </form>
+  </div>
+</body>
+</html>
